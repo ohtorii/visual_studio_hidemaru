@@ -1,0 +1,22 @@
+/*	秀丸エディタからVisual Studioを操作するマクロ
+
+VisualStudioのプロジェクト構成を秀丸エディタのプロジェクトファイル(.hmbook)へ変換する。
+(.hmbook)はソリューション(.sln)と同じディレクトリに保存されます。
+*/
+
+
+call Main;
+endmacro($$return);
+
+
+Main:
+	if(0==strlen(filename)){
+		message("ファイル名が空白です、まずファイル名をつけて保存してください。");
+		return str(false);
+	}
+	
+	$$mode			= "1";
+	$$sync			= "0";
+	$$fn 			= "\"" + filename + "\" ";
+	execmacro "visual_studio_call.mac", "cmd_te_hmbook", $$mode, $$sync, $$fn;
+	return getresultex(-1);

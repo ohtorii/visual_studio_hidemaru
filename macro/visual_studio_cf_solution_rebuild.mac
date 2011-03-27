@@ -1,0 +1,27 @@
+/*秀丸エディタからVisual Studioを操作するマクロ
+現在のファイルが含まれるソリューションをリビルドする。
+*/
+
+
+call Main;
+endmacro($$return);
+
+
+Main:
+	if(0==strlen(filename)){
+		message("ファイル名が空白です、まずファイル名をつけて保存してください。");
+		return str(false);
+	}
+	if(updated){
+		disableerrormsg;
+		save;
+		enableerrormsg;
+	}
+	$$mode			= "1";
+	$$sync			= "0";
+	$$fn 			= "\"" + filename + "\" ";
+	$$wait			= "1";
+	$$print_output	= "1";
+	$$clear_output	= "0";
+	execmacro "visual_studio_call.mac", "cmd_te_solution_rebuild", $$mode, $$sync, $$fn, $$wait, $$print_output, $$clear_output;
+	return getresultex(-1);

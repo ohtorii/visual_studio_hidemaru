@@ -1,0 +1,21 @@
+/*	秀丸エディタからVisual Studioを操作するマクロ
+現在のファイルが含まれるソリューションのデバッグを停止する
+
+「メニュー → デバッグ → デバッグの停止」
+*/
+
+call Main;
+endmacro($$return);
+
+
+Main:
+	if(0==strlen(filename)){
+		message("ファイル名が空白です、まずファイル名をつけて保存してください。");
+		return str(false);
+	}
+	$$mode	= "1";
+	$$sync	= "0";
+	$$fn 	= "\"" + filename + "\" ";
+	execmacro "visual_studio_call.mac", "cmd_te_debug_stop", $$mode, $$sync, $$fn;
+	return getresultex(-1);
+	

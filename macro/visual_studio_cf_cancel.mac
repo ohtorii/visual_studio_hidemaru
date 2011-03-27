@@ -1,0 +1,20 @@
+/*	秀丸エディタからVisual Studioを操作するマクロ
+現在のファイルをビルドしていればキャンセルする。
+*/
+
+
+call Main;
+endmacro($$return);
+
+
+Main:
+	if(0==strlen(filename)){
+		message("ファイル名が空白です、まずファイル名をつけて保存してください。");
+		return str(false);
+	}
+	
+	$$mode			= "0";
+	$$sync			= "0";
+	$$fn 			= "\"" + filename + "\" ";
+	execmacro "visual_studio_call.mac", "cmd_te_cancel", $$mode, $$sync, $$fn;
+	return getresultex(-1);

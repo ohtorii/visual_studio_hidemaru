@@ -1,0 +1,104 @@
+/*秀丸エディタからVisual Studioを操作するマクロ
+
+「今開いているファイルに対する操作」を行うシンプルなメニュー。
+
+【メニューの内容】
+	コンパイル
+	ビルドのキャンセル
+	ソリューションのビルド
+	ソリューションのリビルド
+	ソリューションのクリーン
+	プロジェクトのビルド
+	プロジェクトのリビルド
+	プロジェクトのクリーン
+	デバッグ開始
+	デバッグなしで開始
+	デバッグの停止
+
+http://d.hatena.ne.jp/ohtorii/
+*/
+
+call Main;
+endmacro;
+
+Main:
+	if(0==strlen(filename)){
+		message("ファイル名が空白です、まずファイル名をつけて保存してください。");
+		return str(false);
+	}
+
+	##n=0;
+	$$m[##n]="(&M)\tコンパイル";
+	$$s[##n]="visual_studio_cf_compile.mac";
+	##n=##n+1;
+
+	$$m[##n]="(&A)\tビルドのキャンセル";
+	$$s[##n]="visual_studio_cf_cancel.mac";
+	##n=##n+1;
+
+	$$m[##n]="\x01";
+	$$s[##n]="";
+	##n=##n+1;
+
+	$$m[##n]="(&B)\tソリューションのビルド";
+	$$s[##n]="visual_studio_cf_solution_build.mac";
+	##n=##n+1;
+
+	$$m[##n]="(&R)\tソリューションのリビルド";
+	$$s[##n]="visual_studio_cf_solution_rebuild.mac";
+	##n=##n+1;
+
+	$$m[##n]="(&C)\tソリューションのクリーン";
+	$$s[##n]="visual_studio_cf_solution_clear.mac";
+	##n=##n+1;
+
+	$$m[##n]="\x01";
+	$$s[##n]="";
+	##n=##n+1;
+
+	$$m[##n]="(&U)\tプロジェクトのビルド";
+	$$s[##n]="visual_studio_cf_project_build.mac";
+	##n=##n+1;
+
+	$$m[##n]="(&E)\tプロジェクトのリビルド";
+	$$s[##n]="visual_studio_cf_project_rebuild.mac";
+	##n=##n+1;
+
+	$$m[##n]="(&N)\tプロジェクトのクリーン";
+	$$s[##n]="visual_studio_cf_project_clear.mac";
+	##n=##n+1;
+
+	$$m[##n]="\x01";
+	$$s[##n]="";
+	##n=##n+1;
+
+	$$m[##n]="(&S)\tデバッグ開始";
+	$$s[##n]="visual_studio_cf_debug.mac";
+	##n=##n+1;
+
+	$$m[##n]="(&H)\tデバッグなしで開始";
+	$$s[##n]="visual_studio_cf_run_without_debug.mac";
+	##n=##n+1;
+
+	$$m[##n]="(&E)\tデバッグの停止";
+	$$s[##n]="visual_studio_cf_debug_stop.mac";
+	##n=##n+1;
+
+	$$m[##n]="\x01";
+	$$s[##n]="";
+	##n=##n+1;
+	
+	if 0:
+		//Visual Studioに登録してあるファイル(cpp/h...etc)から
+		//秀丸のプロジェクトファイルを作ります。
+		$$m[##n]="(&P)\t秀丸プロジェクト(.hmbook)の更新";
+		$$s[##n]="visual_studio_cf_hmbook.mac";
+		##n=##n+1;
+
+	menuarray $$m,##n;
+	##ret = result;
+	if(0==##ret){
+		return true;
+	}
+	execmacro $$s[##ret-1];
+	return val(getresultex(-1));

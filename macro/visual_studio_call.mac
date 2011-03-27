@@ -1,0 +1,71 @@
+/*	秀丸エディタからVisual Studioを操作するマクロ
+*/
+
+//
+$g_path_exe = currentmacrodirectory + "\\visual_studio_hidemaru.exe";
+
+
+
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+$g_short_path_exe = "";
+call Main;
+endmacro(str(##return));
+
+
+
+Main:
+	call ConvertShortName $g_path_exe;
+	$g_short_path_exe = $$return;
+	
+	$$argstr="";
+	$$funcname 	= getarg(0);
+	$$mode		= getarg(1);
+	##sync		= val(getarg(2));
+	$$argstr = $$funcname + " ";
+	##i=3;
+	while(##i < argcount){
+		$$argstr = $$argstr + getarg(##i) + " ";
+		##i = ##i + 1;
+	}
+	
+    $$cmd = "cmd.exe /c " + $g_short_path_exe + " " + $$argstr;
+    if($$mode=="0"){
+		runex $$cmd,##sync
+	    	,0,""
+	    	,0,""
+	    	,0,""
+	    	,1,""
+	    	,2,1,0;
+	}else{
+	    runex $$cmd,##sync
+	    	,0,""
+	    	,7,""
+	    	,1,""
+	    	,1,""
+	    	,2,0,0;
+	}
+	if(! result){
+		message("runex 失敗");
+		return false;
+	}
+	
+	if($$mode!="0"){
+		##ret = getresultex(-1);
+		if(0 != ##ret){
+			message("実行失敗\nコマンドラインからの返値="+str(##ret));
+			return false;
+		}	
+	}
+	return true;
+	
+ConvertShortName:
+	$$fn = $$1;
+	##fso = createobject("Scripting.FileSystemObject");
+	##obj = callmethod_returnobj(##fso,"Getfile",$$fn);
+	$$short_name = getpropstr(##obj,"ShortPath");
+	releaseobject(##fso);
+	return $$short_name;
