@@ -1,114 +1,114 @@
-============================================================================
-�G�ۃG�f�B�^���� VisualStudio �𐧌䂷��}�N��
+﻿============================================================================
+秀丸エディタから VisualStudio を制御するマクロ
 
 http://d.hatena.ne.jp/ohtorii/
 ============================================================================
 
-������͉�
-    �G�ۃG�f�B�^���� VisualStudio �𐧌䂷��v���O���}�����̃}�N���ł��B
+■これは何
+    秀丸エディタから VisualStudio を制御するプログラマ向けのマクロです。
 
-    �\�[�X�R�[�h���G�ۃG�f�B�^�ŏ����āA�r���h����x�� VisualStudio �ֈړ�����
-    �̂��ʓ|�Ȃ̂ŁA�u�r���h�E���r���h�E���s...etc�v���G�ۃG�f�B�^����o�����
-    ���ɂ��܂����B
-
-
-���o���邱��
-    �E�R���p�C��
-    �E�r���h�̃L�����Z��
-    �E�\�����[�V�����̃r���h
-    �E�\�����[�V�����̃��r���h
-    �E�\�����[�V�����̃N���[��
-    �E�v���W�F�N�g�̃r���h
-    �E�v���W�F�N�g�̃��r���h
-    �E�v���W�F�N�g�̃N���[��
-    �E�f�o�b�O�J�n
-    �E�f�o�b�O�Ȃ��ŊJ�n
-    �E�f�o�b�O�̒�~
-    �EVisualStudio�ɓo�^����Ă���t�@�C������v���W�F�N�g�t�@�C��(.hmbook)��
-      ���
+    ソースコードを秀丸エディタで書いて、ビルドする度に VisualStudio へ移動する
+    のが面倒なので、「ビルド・リビルド・実行...etc」を秀丸エディタから出来るよ
+    うにしました。
 
 
-���C���X�g�[��
-    �S�t�@�C��(*.mac/*.exe)���G�ۃG�f�B�^�̃}�N���f�B���N�g���փR�s�[���Ă���
-    �����B
-
-    visual_studio_menu_simple.mac ���}�N���o�^���ăL�[�A�T�C�����Ă��������B
-    �}�N���o�^���ʓ|�Ȃ�u���j���[ �� �}�N�� �� �}�N�����s�v������s���邱�Ƃ�
-    �o���܂��B
-
-
-���g����
-    �EVisualStudio�Ŋ����̃v���W�F�N�g���J���Ă��������B�i���Ȃ��̓v���O���}��
-      �̂Ńv���W�F�N�g�t�@�C����10��20�͂���͂��ł��B�j
-    �E���̃v���W�F�N�g�Ɋ܂܂�Ă���\�[�X�R�[�h���G�ۃG�f�B�^�ŊJ���Ă��������B
-      �i�Ⴆ�΁Astdafx.cpp MainFrm.cpp �Ȃǂł��B�j
-    �Evisual_studio_menu_simple.mac �����s���܂��B
-    �E���j���[���|�b�v�A�b�v����̂Ŏ�n�߂Ɂu�R���p�C���v��I�����Ă��������B
-      ��������ƃA�E�g�v�b�g�g�փr���h�󋵂��\������܂��B
-      �R���p�C���G���[������΃t�@�C�����̃N���b�N�ŁA�Y���̃t�@�C���փW�����v
-      �ł��܂��B
+■出来ること
+    ・コンパイル
+    ・ビルドのキャンセル
+    ・ソリューションのビルド
+    ・ソリューションのリビルド
+    ・ソリューションのクリーン
+    ・プロジェクトのビルド
+    ・プロジェクトのリビルド
+    ・プロジェクトのクリーン
+    ・デバッグ開始
+    ・デバッグなしで開始
+    ・デバッグの停止
+    ・VisualStudioに登録されているファイルからプロジェクトファイル(.hmbook)を
+      作る
 
 
-���m�F������
+■インストール
+    全ファイル(*.mac/*.exe)を秀丸エディタのマクロディレクトリへコピーしてくだ
+    さい。
+
+    visual_studio_menu_simple.mac をマクロ登録してキーアサインしてください。
+    マクロ登録が面倒なら「メニュー → マクロ → マクロ実行」から実行することも
+    出来ます。
+
+
+■使い方
+    ・VisualStudioで既存のプロジェクトを開いてください。（あなたはプログラマな
+      のでプロジェクトファイルの10個や20個はあるはずです。）
+    ・そのプロジェクトに含まれているソースコードを秀丸エディタで開いてください。
+      （例えば、stdafx.cpp MainFrm.cpp などです。）
+    ・visual_studio_menu_simple.mac を実行します。
+    ・メニューがポップアップするので手始めに「コンパイル」を選択してください。
+      そうするとアウトプット枠へビルド状況が表示されます。
+      コンパイルエラーがあればファイル名のクリックで、該当のファイルへジャンプ
+      できます。
+
+
+■確認した環境
     VisualStudio 2008
     VisualStudio 2010
 
-    C++�͋���ȃv���W�F�N�g(����t�@�C����50���s�ȏ�)�œ���m�F���Ă��܂��B
-    C#/VB�́u����ɂ��퐢�E�v�œ���m�F�������x�ł��B
+    C++は巨大なプロジェクト(数千ファイル＆50万行以上)で動作確認しています。
+    C#/VBは「こんにちわ世界」で動作確認した程度です。
 
-    VisualStudio�͕����N�����Ă��Ă����������삷��悤�ɂ��Ă��܂��B
-
-
-������
-    ���̃}�N���͋N���ς݂�VisualStudio�𐧌䂵�Ă��܂��BVisualStudio���N������
-    ���Ȃ���Ԃ��Ɖ������܂���B
+    VisualStudioは複数起動していても正しく動作するようにしています。
 
 
-����������
-    �\�[�X�R�[�h�ɐF�X�Ə����Ă��܂��B
+■注意
+    このマクロは起動済みのVisualStudioを制御しています。VisualStudioが起動して
+    いない状態だと何もしません。
 
 
-���J�X�^�}�C�Y
-    �E�u�R���p�C���E�r���h�̃L�����Z���E�\�����[�V�����̃r���h...etc�v�͂P
-      �R�}���h�P�t�@�C���ɂȂ��Ă��܂��Bvisual_studio_menu_simple.mac �͊e
-      �R�}���h���Ăяo���Ă���T���v���I�Ȉʒu�Â��ł��B
-
-    �E����ȃL�[�A�T�C���ɂ����Visual Studio�Ɠ�������ɂȂ�܂��B
-        F7 �r���h       (visual_studio_cf_compile.mac)
-        F5 �f�o�b�O�J�n (visual_studio_cf_debug.mac)
-
-    �Evisual_studio_hidemaru.exe ��Visual Studio�𐧌䂵�Ă��܂��A�G�ۂɈˑ���
-      �Ȃ��̂ő��̃e�L�X�g�G�f�B����g�p�ł��邩������܂���B
+■内部実装
+    ソースコードに色々と書いています。
 
 
-���}�N���̐���
-    visual_studio_menu_simple.mac           �ȈՃ��j���[
+■カスタマイズ
+    ・「コンパイル・ビルドのキャンセル・ソリューションのビルド...etc」は１
+      コマンド１ファイルになっています。visual_studio_menu_simple.mac は各
+      コマンドを呼び出しているサンプル的な位置づけです。
 
-    visual_studio_cf_compile.mac            �R���p�C��
-    visual_studio_cf_cancel.mac             �r���h�̃L�����Z��
-    visual_studio_cf_debug.mac              �f�o�b�O�J�n
-    visual_studio_cf_debug_stop.mac         �f�o�b�O�̒�~
-    visual_studio_cf_project_build.mac      �v���W�F�N�g�̃r���h
-    visual_studio_cf_project_clear.mac      �v���W�F�N�g�̃N���[��
-    visual_studio_cf_project_rebuild.mac    �v���W�F�N�g�̃��r���h
-    visual_studio_cf_run_without_debug.mac  �f�o�b�O�Ȃ��ŊJ�n
-    visual_studio_cf_solution_build.mac     �\�����[�V�����̃r���h
-    visual_studio_cf_solution_clear.mac     �\�����[�V�����̃N���[��
-    visual_studio_cf_solution_rebuild.mac   �\�����[�V�����̃��r���h
-    visual_studio_cf_hmbook.mac             �v���W�F�N�g�t�@�C��(.hmbook)����
-    ��
+    ・こんなキーアサインにするとVisual Studioと同じ操作になります。
+        F7 ビルド       (visual_studio_cf_compile.mac)
+        F5 デバッグ開始 (visual_studio_cf_debug.mac)
 
-    visual_studio_call.mac                  ���n��������}�N��
-    visual_studio_hidemaru.exe              Visual Studio�𐧌䂷����s
-    �t�@�C��
+    ・visual_studio_hidemaru.exe がVisual Studioを制御しています、秀丸に依存し
+      ないので他のテキストエディから使用できるかもしれません。
 
 
-�����̑�
-    ���̃}�N���� Visual Studio �ɕύX�������邱�Ƃ͂��܂���BVisual Studio����
-    �������o�������ł��B
-    �܂��AVisual Studio ���G�ۃG�f�B�^�ɑ΂��ď��𑗂���邱�Ƃ����Ă��܂�
-    ��B
-    �i�Ⴆ�΃C�x���g��t�b�N��o�^���ė��ŃS�j���S�j���͂��Ă��܂���B�j
+■マクロの説明
+    visual_studio_menu_simple.mac           簡易メニュー
+
+    visual_studio_cf_compile.mac            コンパイル
+    visual_studio_cf_cancel.mac             ビルドのキャンセル
+    visual_studio_cf_debug.mac              デバッグ開始
+    visual_studio_cf_debug_stop.mac         デバッグの停止
+    visual_studio_cf_project_build.mac      プロジェクトのビルド
+    visual_studio_cf_project_clear.mac      プロジェクトのクリーン
+    visual_studio_cf_project_rebuild.mac    プロジェクトのリビルド
+    visual_studio_cf_run_without_debug.mac  デバッグなしで開始
+    visual_studio_cf_solution_build.mac     ソリューションのビルド
+    visual_studio_cf_solution_clear.mac     ソリューションのクリーン
+    visual_studio_cf_solution_rebuild.mac   ソリューションのリビルド
+    visual_studio_cf_hmbook.mac             プロジェクトファイル(.hmbook)を作
+    る
+
+    visual_studio_call.mac                  橋渡しをするマクロ
+    visual_studio_hidemaru.exe              Visual Studioを制御する実行
+    ファイル
 
 
-�ȏ�ł�
+■その他
+    このマクロは Visual Studio に変更を加えることはしません。Visual Studioから
+    情報を取り出すだけです。
+    また、Visual Studio が秀丸エディタに対して情報を送りつけることもしていませ
+    ん。
+    （例えばイベントやフックを登録して裏でゴニョゴニョはしていません。）
+
+
+以上です
