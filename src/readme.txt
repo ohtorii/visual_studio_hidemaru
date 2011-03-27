@@ -1,43 +1,46 @@
-============================================================================
+﻿============================================================================
 visual studio hidemaru
 ============================================================================
-�i�t�@�C���j
-readme.txt					���̃t�@�C��
-make_exe.bat				���s�t�@�C��(.exe)�����o�b�`�t�@�C��
-setup.py					py2exe�Ŏg�p����ݒ�t�@�C��
-visual_studio_hidemaru.py	�{��
-license.txt					���C�Z���X
+（ファイル）
+readme.txt                  このファイル
+make_exe.bat                実行ファイル(.exe)を作るバッチファイル
+setup.py                    py2exeで使用する設定ファイル
+visual_studio_hidemaru.py   本体
+license.txt                 ライセンス
 
 
-�i�K�v�Ȃ��́j
-python 	ver 2.7.1
-py2exe	ver 0.6.9
+（必要なもの）
+python  ver 2.7.1
+py2exe  ver 0.6.9
 
-python ver3�n�ł͓��삵�܂���A�K��ver2�n���g�p���Ă��������B
+python ver3系では動作しません、必ずver2系を使用してください。
 
-�i���s�t�@�C���̍����j
-�R�}���h�v�����v�g���� make_exe.bat ���N�����Ă��������B
-dist�f�B���N�g���Ɏ��s�t�@�C��(.exe)������܂��A�G�ۂ̃}�N���f�B���N�g��
-�ɃR�s�[���Ă��������B
+（実行ファイルの作り方）
+コマンドプロンプトから make_exe.bat を起動してください。
+distディレクトリに実行ファイル(.exe)が作られます、秀丸のマクロディレクトリ
+にコピーしてください。
 
-�i���������j
-COM �� RunningObjectTable ����N�����Ă���Visual Studio��񋓂��܂��B������Visual Studio���N�����Ă��Ă���ӂɎ��ʂł��܂��B
- �i_get_dte_from_pid�֐� / cmd_dte_list�֐��Ȃǁj
-���ꂪ�S�Ăƌ����Ă��ߌ��ł͂���܂���B
-
-
-RunningObjectTable �� IROTVIEW.EXE �Ŋm�F�ł��܂��B�i�ŋ߂�Visual Studio�ɂ͓����Ă��܂���A�m��Visual Studio6�ɓ����Ă����悤�ȁE�E�E�j
-
-cmd_te_*�֐��̓\�[�X�R�[�h�̐�΃p�X������Visual Studio��T���o���āA�r���h����s���s�Ȃ��e�L�X�g�G�f�B�^�����̊֐��ł��B
-
-�i���̑��j
-�����python�ō��܂������AC#�̕����T���v�����������₷����������܂���B
+（内部実装）
+COM の RunningObjectTable から起動しているVisual Studioを列挙します。複数の
+Visual Studioが起動していても一意に識別できます。
+ （_get_dte_from_pid関数 / cmd_dte_list関数など）
+これが全てと言っても過言ではありません。
 
 
-�i�ӎ��j
-visual_studio.vim ���Q�l�ɂ����Ă��炢�܂����B
+RunningObjectTable は IROTVIEW.EXE で確認できます。（最近のVisual Studioには
+入っていません、確かVisual Studio6に入っていたような・・・）
+
+cmd_te_*関数はソースコードの絶対パス名からVisual Studioを探し出して、ビルドや
+実行を行なうテキストエディタ向けの関数です。
+
+（その他）
+今回はpythonで作りましたが、C#の方がサンプルも多く作りやすいかもしれません。
+
+
+（謝辞）
+visual_studio.vim を参考にさせてもらいました。
 http://www.vim.org/scripts/script.php?script_id=864
 
 
-�i�A����j
+（連絡先）
 http://d.hatena.ne.jp/ohtorii/
