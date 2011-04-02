@@ -2,6 +2,9 @@
 現在のファイルが含まれるソリューションをデバッガ無しで実行する
 
 「メニュー → デバッグ → デバッグなしで開始」
+
+http://d.hatena.ne.jp/ohtorii/20110402/1301719953
+https://github.com/ohtorii/visual_studio_hidemaru
 */
 
 call Main;

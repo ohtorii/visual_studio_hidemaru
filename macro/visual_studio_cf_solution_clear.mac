@@ -1,5 +1,9 @@
 /*	秀丸エディタからVisual Studioを操作するマクロ
 現在のファイルが含まれるソリューションをクリアする。
+
+
+http://d.hatena.ne.jp/ohtorii/20110402/1301719953
+https://github.com/ohtorii/visual_studio_hidemaru
 */
 
 

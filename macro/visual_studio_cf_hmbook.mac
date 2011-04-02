@@ -2,6 +2,10 @@
 
 VisualStudioのプロジェクト構成を秀丸エディタのプロジェクトファイル(.hmbook)へ変換する。
 (.hmbook)はソリューション(.sln)と同じディレクトリに保存されます。
+
+
+http://d.hatena.ne.jp/ohtorii/20110402/1301719953
+https://github.com/ohtorii/visual_studio_hidemaru
 */
 
 

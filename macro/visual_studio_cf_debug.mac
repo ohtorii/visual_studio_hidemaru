@@ -2,6 +2,10 @@
 現在のファイルが含まれるソリューションをデバッグ開始する。
 
 「メニュー → デバッグ → デバッグ開始」
+
+
+http://d.hatena.ne.jp/ohtorii/20110402/1301719953
+https://github.com/ohtorii/visual_studio_hidemaru
 */
 
 call Main;
