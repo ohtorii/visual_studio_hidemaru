@@ -2,6 +2,7 @@
 秀丸エディタから VisualStudio を制御するマクロ
 
 http://d.hatena.ne.jp/ohtorii/
+https://github.com/ohtorii/visual_studio_hidemaru
 ============================================================================
 
 ■これは何
@@ -28,6 +29,10 @@ http://d.hatena.ne.jp/ohtorii/
       作る
 
 
+■動作環境
+    秀丸エディタ ver8.03（ver8系なら多分動くと思います）
+
+
 ■インストール
     全ファイル(*.mac/*.exe)を秀丸エディタのマクロディレクトリへコピーしてくだ
     さい。
@@ -37,7 +42,7 @@ http://d.hatena.ne.jp/ohtorii/
     出来ます。
 
 
-■使い方
+■試しに使ってみる
     ・VisualStudioで既存のプロジェクトを開いてください。（あなたはプログラマな
       のでプロジェクトファイルの10個や20個はあるはずです。）
     ・そのプロジェクトに含まれているソースコードを秀丸エディタで開いてください。
@@ -53,10 +58,9 @@ http://d.hatena.ne.jp/ohtorii/
     VisualStudio 2008
     VisualStudio 2010
 
-    C++は巨大なプロジェクト(数千ファイル＆50万行以上)で動作確認しています。
-    C#/VBは「こんにちわ世界」で動作確認した程度です。
-
-    VisualStudioは複数起動していても正しく動作するようにしています。
+    C++/C#/VBプロジェクトで動作を確認しています。
+    VisualStudioは複数起動していても正しく動作します。
+    Express版は未対応です（本マクロでは認識しません）。
 
 
 ■注意
@@ -65,7 +69,21 @@ http://d.hatena.ne.jp/ohtorii/
 
 
 ■内部実装
-    ソースコードに色々と書いています。
+    秀丸エディタで編集しているファイル名を含むVisual Studioを特定して、各種
+    コマンド（ビルド／デバッグ・・・）を送りつけて結果を取得しています。
+
+    例えばVisual Studioが二つ起動しているとします、
+    ・VisualStudio_0
+        c:\my_app\src\main.cpp  （ソリューションエクスプローラーに含まれる）
+
+    ・VisualStudio_1
+        c:\project\main.cpp
+
+    このとき、c:\my_app\src\main.cpp を秀丸エディタでリビルドすると 
+    VisualStudio_0 に対してリビルドコマンドを送り、ビルド中のメッセージを取得
+    しています。
+
+    詳細はソースコードに書いています。
 
 
 ■カスタマイズ
@@ -95,20 +113,15 @@ http://d.hatena.ne.jp/ohtorii/
     visual_studio_cf_solution_build.mac     ソリューションのビルド
     visual_studio_cf_solution_clear.mac     ソリューションのクリーン
     visual_studio_cf_solution_rebuild.mac   ソリューションのリビルド
-    visual_studio_cf_hmbook.mac             プロジェクトファイル(.hmbook)を作
-    る
+    visual_studio_cf_hmbook.mac             秀丸の(.hmbook)ファイルを作る
 
     visual_studio_call.mac                  橋渡しをするマクロ
-    visual_studio_hidemaru.exe              Visual Studioを制御する実行
-    ファイル
+    visual_studio_hidemaru.exe              VisualStudioを制御する実行ファイル
 
 
 ■その他
     このマクロは Visual Studio に変更を加えることはしません。Visual Studioから
     情報を取り出すだけです。
-    また、Visual Studio が秀丸エディタに対して情報を送りつけることもしていませ
-    ん。
-    （例えばイベントやフックを登録して裏でゴニョゴニョはしていません。）
 
 
-以上です
+以上

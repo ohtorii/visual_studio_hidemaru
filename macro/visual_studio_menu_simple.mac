@@ -16,6 +16,7 @@
 	デバッグの停止
 
 http://d.hatena.ne.jp/ohtorii/
+https://github.com/ohtorii/visual_studio_hidemaru
 */
 
 call Main;
@@ -83,18 +84,19 @@ Main:
 	$$m[##n]="(&E)\tデバッグの停止";
 	$$s[##n]="visual_studio_cf_debug_stop.mac";
 	##n=##n+1;
-
-	$$m[##n]="\x01";
-	$$s[##n]="";
-	##n=##n+1;
 	
-	if 0:
+	if(0){
+		$$m[##n]="\x01";
+		$$s[##n]="";
+		##n=##n+1;
+		
 		//Visual Studioに登録してあるファイル(cpp/h...etc)から
 		//秀丸のプロジェクトファイルを作ります。
 		$$m[##n]="(&P)\t秀丸プロジェクト(.hmbook)の更新";
 		$$s[##n]="visual_studio_cf_hmbook.mac";
 		##n=##n+1;
-
+	}
+	
 	menuarray $$m,##n;
 	##ret = result;
 	if(0==##ret){

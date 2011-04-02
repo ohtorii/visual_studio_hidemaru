@@ -15,23 +15,25 @@ py2exe  ver 0.6.9
 
 python ver3系では動作しません、必ずver2系を使用してください。
 
+
 （実行ファイルの作り方）
 コマンドプロンプトから make_exe.bat を起動してください。
 distディレクトリに実行ファイル(.exe)が作られます、秀丸のマクロディレクトリ
 にコピーしてください。
 
+
 （内部実装）
 COM の RunningObjectTable から起動しているVisual Studioを列挙します。複数の
 Visual Studioが起動していても一意に識別できます。
  （_get_dte_from_pid関数 / cmd_dte_list関数など）
-これが全てと言っても過言ではありません。
-
+これが全てと言っても過言ではありません、残りの関数は飾りですよ。
 
 RunningObjectTable は IROTVIEW.EXE で確認できます。（最近のVisual Studioには
 入っていません、確かVisual Studio6に入っていたような・・・）
 
 cmd_te_*関数はソースコードの絶対パス名からVisual Studioを探し出して、ビルドや
 実行を行なうテキストエディタ向けの関数です。
+
 
 （その他）
 今回はpythonで作りましたが、C#の方がサンプルも多く作りやすいかもしれません。
