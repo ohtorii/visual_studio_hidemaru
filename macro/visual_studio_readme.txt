@@ -1,7 +1,9 @@
 ﻿============================================================================
 秀丸エディタから VisualStudio を制御するマクロ
 
+(web)
 http://d.hatena.ne.jp/ohtorii/20110402/1301719953
+(github)
 https://github.com/ohtorii/visual_studio_hidemaru
 ============================================================================
 
@@ -11,6 +13,8 @@ https://github.com/ohtorii/visual_studio_hidemaru
     ソースコードを秀丸エディタで書いて、ビルドする度に VisualStudio へ移動する
     のが面倒なので、「ビルド・リビルド・実行...etc」を秀丸エディタから出来るよ
     うにしました。
+
+    秀丸エディタとVisualStudioを往復する手間がなくなります。
 
 
 ■出来ること
@@ -28,6 +32,9 @@ https://github.com/ohtorii/visual_studio_hidemaru
     ・VisualStudioに登録されているファイルからプロジェクトファイル(.hmbook)を
       作る
 
+    （備考）
+    秀丸エディタ上でプログラムのデバッグは出来ません。
+
 
 ■動作環境
     秀丸エディタ ver8.03（ver8系なら多分動くと思います）
@@ -43,23 +50,30 @@ https://github.com/ohtorii/visual_studio_hidemaru
 
 
 ■試しに使ってみる
-    ・VisualStudioで既存のプロジェクトを開いてください。（あなたはプログラマな
-      のでプロジェクトファイルの10個や20個はあるはずです。）
-    ・そのプロジェクトに含まれているソースコードを秀丸エディタで開いてください。
-      （例えば、stdafx.cpp MainFrm.cpp などです。）
+    ・VisualStudioで既存のソリューション(.sln)を開いてください。
+      （あなたはプログラマなのでソリューションの10個や20個はあるはずです。）
+
+    ・そのソリューションに含まれているソースコードを秀丸エディタで開いてくださ
+      い。（例えば、stdafx.cpp MainFrm.cpp などです。）
+
     ・visual_studio_menu_simple.mac を実行します。
+
     ・メニューがポップアップするので手始めに「コンパイル」を選択してください。
       そうするとアウトプット枠へビルド状況が表示されます。
       コンパイルエラーがあればファイル名のクリックで、該当のファイルへジャンプ
       できます。
+
+    起動済みのVisual Studioを秀丸エディタから制御しています。
+    まず、Visual Studioを起動してソリューション(.sln)を開いてください。
 
 
 ■確認した環境
     VisualStudio 2008
     VisualStudio 2010
 
-    C++/C#/VBプロジェクトで動作を確認しています。
+    C++/C#/VBのソリューションで動作を確認しています。
     VisualStudioは複数起動していても正しく動作します。
+    ソリューションに複数のプロジェクトが含まれていても正しく動作します。
     Express版は未対応です（本マクロでは認識しません）。
 
 
@@ -71,6 +85,10 @@ https://github.com/ohtorii/visual_studio_hidemaru
 ■内部実装
     秀丸エディタで編集しているファイル名を含むVisual Studioを特定して、各種
     コマンド（ビルド／デバッグ・・・）を送りつけて結果を取得しています。
+    送りつける言ってもSendMessageではなく、サービスとかCOMと呼ばれている類いの
+    ものです。
+    マイクロソフトが公開している公のやり方で制御しています。
+
 
     例えばVisual Studioが二つ起動しているとします、
     ・VisualStudio_0
@@ -79,11 +97,11 @@ https://github.com/ohtorii/visual_studio_hidemaru
     ・VisualStudio_1
         c:\project\main.cpp
 
-    このとき、c:\my_app\src\main.cpp を秀丸エディタでリビルドすると 
+    このとき、c:\my_app\src\main.cpp を秀丸エディタでリビルドすると
     VisualStudio_0 に対してリビルドコマンドを送り、ビルド中のメッセージを取得
     しています。
 
-    詳細はソースコードに書いています。
+    詳細はpythonのソースコードに書いています。
 
 
 ■カスタマイズ
