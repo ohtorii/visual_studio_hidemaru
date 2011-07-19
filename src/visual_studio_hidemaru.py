@@ -92,7 +92,7 @@ win32uiole.EnableBusyDialog(True);
 #コンソールへ例外の詳細が出力されます
 #   False   デバッグ中
 #   True    テキストエディタと連動する
-g_exception_dont_raise = True
+g_exception_dont_raise = False
 
 vsBuildStateNotStarted = 1   # Build has not yet been started.
 vsBuildStateInProgress = 2   # Build is currently in progress.
@@ -154,15 +154,31 @@ g_output_text_interval = 0.2
 g_help = "visual_studio_hidemaru.exe command arg1 arg2 ...\n"   \
 +   "cmd_dte_list   print DTE list.\n"
 
+g_codec='cp932'
+
+def _cmp_str(s1,s2):
+    if isinstance(s1,unicode):
+        if isinstance(s2,unicode):
+            return s1==s2
+        else:
+            return s1==s2.decode(g_codec)
+    else:
+        if isinstance(s2,unicode):
+            return s1.decode(g_codec)==s2
+        else:
+            return s1==s2
+
+def _to_unicode(s):
+    if isinstance(s,unicode):
+        return s
+    else:
+        return s.decode(g_codec)
 
 def _vs_msg(s):
     _vs_print("vs>"+s)
 
 def _vs_print(s):
-    if isinstance(s,unicode):
-        print(s.encode("cp932"))
-    else:
-        print(s)
+    print(_to_unicode(s))
 
 def _to_bool_string(a):
     return str(int(a))
@@ -577,6 +593,7 @@ def cmd_set_startup_project(pid,project_abs_filename):
     project_abs_filename - プロジェクトの絶対パス名
                             (Ex.) c:/Projects/my_app/my_app/my_app.vcxproj
     """
+    project_abs_filename = _to_unicode(project_abs_filename)
     dte = get_dte_obj(pid)
     if not dte:
         _vs_msg("Not found process")
@@ -934,7 +951,6 @@ def cmd_hidemaru_hmbook(pid):
     g_cmd_result=True
     return True
 
-
 def _search_file(dte, abs_filename):
     """
     abs_filename - あらかじめos.path.normpath().lower()を行なう
@@ -945,8 +961,8 @@ def _search_file(dte, abs_filename):
     for o in prjs:
         for item in iter_project_items(o.ProjectItems):
             if (str(item.Kind).lower() == vsProjectItemKindPhysicalFile) and (1==item.FileCount):
-                abs_fn = item.FileNames(1)
-                if abs_filename == os.path.normpath(abs_fn).lower():
+                abs_fn = _to_unicode(item.FileNames(1))
+                if _cmp_str(abs_filename, os.path.normpath(abs_fn).lower()):
                     #Solution        = _dte_prop(dte,"Solution")
                     #SolutionBuild   = _dte_prop(Solution,"SolutionBuild")
                     #print SolutionBuild.StartupProjects
@@ -958,6 +974,7 @@ def _get_pid_from_filename(abs_filename):
                     (Ex.) c:/project/my_app/src/main.cpp
     return - None or [pid,Document,Project]
     """
+    abs_filename = _to_unicode(abs_filename)
     abs_filename = os.path.normpath(abs_filename).lower()
     dte_list = _get_dte_from_pid()
     for o in dte_list:
@@ -979,7 +996,7 @@ def cmd_file_compile(pid,abs_filename,enable_check=True):
     if not dte:
         _vs_msg("Not found process")
         return False
-
+    abs_filename = _to_unicode(abs_filename)
     abs_filename = os.path.normpath(abs_filename).lower()
     if not os.path.isfile(abs_filename):
         _vs_msg("File not found."+abs_filename)
@@ -1221,7 +1238,6 @@ def main():
         #_vs_print(g_help)
         return False
 
-
     if not argv[1].startswith("cmd_"):
         #_vs_print("Invalid command name.")
         return False
@@ -1241,11 +1257,11 @@ def test():
     FullName2="C:\\Users\\hoge\\documents\\visual studio 2010\\Projects\\test_20110220\\test_20110220\\test_20110220.vcxproj"
 
     #プロセスID（タスクマネージャーで確認する）
-    g_pid= 4700
+    g_pid= 5968
 
-    FileName1="C:\\Users\\hoge\\documents\\visual studio 2010\\Projects\\test_20110220\\test_mfc_app\\FileView.cpp"
+    FileName1="C:\\開発\\test\\test.cpp"
     FileName2="C:\\Users\\hoge\\documents\\visual studio 2010\\Projects\\test_20110220\\test_20110220\\test_20110220.cpp"
-    #cmd_file_compile(g_pid,FileName1)
+    cmd_file_compile(g_pid,FileName1)
     #cmd_debug_stop(g_pid)
     #cmd_debug(g_pid)
     #cmd_run(g_pid)
