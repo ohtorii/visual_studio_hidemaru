@@ -1,0 +1,29 @@
+/*	秀丸エディタからVisual Studioを操作するマクロ
+現在のファイルをVisualStudioで開いてフォーカスを移す。（VisualStudioに切り替える）
+
+http://d.hatena.ne.jp/ohtorii/20110402/1301719953
+https://github.com/ohtorii/visual_studio_hidemaru
+*/
+
+
+call Main;
+endmacro($$return);
+
+
+Main:
+	if(0==strlen(filename)){
+		message("ファイル名が空白です、まずファイル名をつけて保存してください。");
+		return str(false);
+	}
+	if(updated){
+		disableerrormsg;
+		save;
+		enableerrormsg;
+	}
+	$$mode			= "1";
+	$$sync			= "0";
+	$$fn 			= "\"" + filename + "\" ";
+	$$line_no		= str(lineno);
+	$$column_no=str(column+1);
+	execmacro "visual_studio_call.mac", "cmd_te_switch", $$mode, $$sync, $$fn, $$line_no, $$column_no;
+	return getresultex(-1);

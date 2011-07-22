@@ -1060,6 +1060,33 @@ def cmd_te_file_compile(abs_filename,wait=False,print_output=False,clear_output=
         return True
     return False
 
+def cmd_openfile(pid,abs_filename,line_no=1,column_no=1):
+    """ファイルをコンパイルする
+
+    abs_filename -  ファイル名の絶対パス
+                    (Ex.) c:/project/my_app/src/main.cpp
+    """
+    dte = get_dte_obj(pid)
+    if not dte:
+        _vs_msg("Not found process")
+        return False
+    abs_filename = _to_unicode(abs_filename)
+    abs_filename = os.path.normpath(abs_filename).lower()
+    if not os.path.isfile(abs_filename):
+        _vs_msg("File not found."+abs_filename)
+        return False
+
+    #ソリューションに含まれていなくてもファイルを開いてビルドできてしまうので、その対策。
+    ret = _search_file(dte,abs_filename)
+    if None is ret:
+        return False
+
+    dte.ItemOperations.OpenFile(abs_filename)
+    dte.ActiveDocument.Selection.StartOfDocument()
+    dte.ActiveDocument.Selection.MoveToLineAndOffset(int(line_no),int(column_no),False)
+    global g_cmd_result
+    g_cmd_result=True
+    return True
 
 def _te_main(func,abs_filename,wait,print_output,clear_output,change_startup_project=False):
     wait        =_to_bool(wait)
@@ -1227,6 +1254,21 @@ def cmd_te_hmbook(abs_filename):
     """
     return _te_main2(cmd_hidemaru_hmbook,abs_filename)
 
+def cmd_te_switch(abs_filename, line_no=1, column_no=1):
+    """ファイルをVisualStudioで開いてフォーカスを移す。
+    abs_filename-   ファイル名の絶対パス
+                    (Ex.) c:/project/my_app/src/main.cpp
+    line_no - カーソル行
+    column_no - カーソル列
+    """
+    ret = _get_pid_from_filename(abs_filename)
+    if None is ret:
+        return False
+    pid=ret[0]
+    Project=ret[2]
+    if not cmd_openfile(pid,abs_filename,line_no,column_no):
+        return False
+    return cmd_activate(pid)
 
 def escape(s):
     s = s.replace('"', '\"')

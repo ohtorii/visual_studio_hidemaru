@@ -97,6 +97,15 @@ Main:
 		$$s[##n]="visual_studio_cf_hmbook.mac";
 		##n=##n+1;
 	}
+	if(1){
+		$$m[##n]="\x01";
+		$$s[##n]="";
+		##n=##n+1;
+		
+		$$m[##n]="(&P)このファイルをVisual Studioで編集する\t";
+		$$s[##n]="visual_studio_cf_switch.mac";
+		##n=##n+1;
+	}
 	
 	menuarray $$m,##n;
 	##ret = result;
