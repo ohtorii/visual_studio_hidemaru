@@ -1,7 +1,7 @@
-2011/07/24
-- ���{��p�X�̃o�O�C��
-- �G�ۂŊJ���Ă���t�@�C����VisualStudio�ŊJ���}�N����ǉ��B
-  visual_studio_cf_switch.mac ��ǉ�
-  visual_studio_menu_simple.mac �֔��f��
+﻿2011/07/24
+- 日本語パスのバグ修正
+- 秀丸で開いているファイルをVisualStudioで開くマクロを追加。
+  visual_studio_cf_switch.mac を追加
+  visual_studio_menu_simple.mac へ反映済
 2011/07/19
-- ���{��p�X�ւ̑Ή��B
+- 日本語パスへの対応。
