@@ -98,11 +98,15 @@ Main:
 		##n=##n+1;
 	}
 	if(1){
+		/*memo: 下記条件を全て満たすこと。
+			・VisualStudioでソリューションを開いている
+			・開こうとするファイルがソリューションに登録されている
+		*/
 		$$m[##n]="\x01";
 		$$s[##n]="";
 		##n=##n+1;
 		
-		$$m[##n]="(&P)このファイルをVisual Studioで編集する\t";
+		$$m[##n]="(&O)\tこのファイルをVisual Studioで編集する";
 		$$s[##n]="visual_studio_cf_switch.mac";
 		##n=##n+1;
 	}

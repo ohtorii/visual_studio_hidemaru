@@ -92,7 +92,7 @@ win32uiole.EnableBusyDialog(True);
 #コンソールへ例外の詳細が出力されます
 #   False   デバッグ中
 #   True    テキストエディタと連動する
-g_exception_dont_raise = False
+g_exception_dont_raise = True
 
 vsBuildStateNotStarted = 1   # Build has not yet been started.
 vsBuildStateInProgress = 2   # Build is currently in progress.
@@ -174,11 +174,17 @@ def _to_unicode(s):
     else:
         return s.decode(g_codec)
 
+def _to_mbc(s):
+    if isinstance(s,unicode):
+        return s.encode(g_codec)
+    else:
+        return s
+
 def _vs_msg(s):
     _vs_print("vs>"+s)
 
 def _vs_print(s):
-    print(_to_unicode(s))
+    print(_to_mbc(s));
 
 def _to_bool_string(a):
     return str(int(a))
