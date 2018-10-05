@@ -7,7 +7,7 @@
 
 ### 動作環境
 - 秀丸エディタ ver8.03（ver8系なら多分動くと思います）
-- VisualStudio 2008／VisualStudio 2010（Express版は未対応）
+- VisualStudio 2008／VisualStudio 2010／VisualStudio 2013（Express版は未対応）
 - C++/C#/VBのソリューションで動作を確認しています。
 
 ### ディレクトリ構成
