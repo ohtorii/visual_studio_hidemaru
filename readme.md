@@ -18,4 +18,7 @@
 ### 動作イメージ
 - ![Alt text](http://cdn-ak.f.st-hatena.com/images/fotolife/o/ohtorii/20110402/20110402135007.png)
 
+### 謝辞
+[visual_studio.vim](https://www.vim.org/scripts/script.php?script_id=864)のソースコードをかなり参考にさせて頂きました、ありがとうございます。
+
 以上
