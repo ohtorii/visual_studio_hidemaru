@@ -6,7 +6,7 @@
 - ソースコードを秀丸エディタで書いて、ビルドする度に VisualStudio へ移動するのが面倒なので、「ビルド・リビルド・実行...etc」を秀丸エディタから出来るようにしました。
 
 ### 動作環境
-- 秀丸エディタ ver8.03（ver8系なら多分動くと思います）
+- 秀丸エディタ ver8.03以降
 - VisualStudio 2008／VisualStudio 2010／VisualStudio 2013／VisualStudio 2015（それぞれExpress版は未対応）
 - Microsoft VisualStudio Community 2017
 - C++/C#/VBのソリューションで動作を確認しています。
